@@ -30,8 +30,12 @@
               body: JSON.stringify({ query }),
             }
           );
-          const text = await response.text(); // ou .json() selon votre workflow
-          document.getElementById("resultat").innerHTML = text;
+          const data = await response.json();
+          document.getElementById("resultat").innerHTML = `<h3>Résumé :</h3><p>${
+            data.resume
+          }</p><h3>Sources :</h3><ul>${data.sources
+            .map((src) => `<li>${src}</li>`)
+            .join("")}</ul>`;
         });
     </script>
   </body>
