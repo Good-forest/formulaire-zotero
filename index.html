@@ -7,19 +7,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form
-      action="https://romualdgoodforest.app.n8n.cloud/webhook-test/c22acf94-4d6f-4569-8b84-dcc6cc87aa0c"
-      method="POST"
-    >
-      <label for="query">Sujet de la recherche :</label><br />
-      <input
-        type="text"
-        id="query"
-        name="query"
-        placeholder="Entrez votre sujet"
-        required
-      /><br />
-      <input type="submit" value="Envoyer" />
+    <form id="zoteroForm">
+      <label for="query">Sujet :</label><br />
+      <input type="text" id="query" name="query" required /><br /><br />
+      <button type="submit">Envoyer</button>
     </form>
+
+    <div id="resultat"></div>
+
+    <script>
+      document
+        .getElementById("zoteroForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const query = document.getElementById("query").value;
+          document.getElementById("resultat").innerText = "Recherche en cours...";
+          const response = await fetch(
+            "https://romualdgoodforest.app.n8n.cloud/webhook-test/c22acf94-4d6f-4569-8b84-dcc6cc87aa0c",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ query }),
+            }
+          );
+          const text = await response.text(); // ou .json() selon votre workflow
+          document.getElementById("resultat").innerHTML = text;
+        });
+    </script>
   </body>
 </html>
