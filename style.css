@@ -1,3 +1,9 @@
 * {
-  background: greenyellow;
+  background: rgb(222, 223, 222);
+}
+
+button {
+  background-color: greenyellow;
+  padding: 1vw 2vw;
+  color: antiquewhite;
 }
